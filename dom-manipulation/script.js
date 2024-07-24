@@ -34,9 +34,21 @@ function addQuote() {
   const newQuoteCategory = document.getElementById('newQuoteCategory').value;
 
   if (newQuoteText && newQuoteCategory) {
+    // Add the new quote to the quotes array
     quotes.push({ text: newQuoteText, category: newQuoteCategory });
+
+    // Create new DOM elements for the new quote
+    const newQuoteDiv = document.createElement('div');
+    newQuoteDiv.textContent = `"${newQuoteText}" - ${newQuoteCategory}`;
+
+    // Append the new quote to the quoteDisplay div
+    const quoteDisplay = document.getElementById('quoteDisplay');
+    quoteDisplay.appendChild(newQuoteDiv);
+
+    // Clear the input fields
     document.getElementById('newQuoteText').value = '';
     document.getElementById('newQuoteCategory').value = '';
+
     alert('New quote added!');
   } else {
     alert('Please enter both a quote and a category.');
