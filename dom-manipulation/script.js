@@ -45,6 +45,12 @@ function addQuote() {
     // Save the updated quotes array to local storage
     saveQuotes();
 
+    // Update the DOM
+    const newQuoteDiv = document.createElement('div');
+    newQuoteDiv.textContent = `"${newQuoteText}" - ${newQuoteCategory}`;
+    const quoteDisplay = document.getElementById('quoteDisplay');
+    quoteDisplay.appendChild(newQuoteDiv);
+
     // Clear the input fields
     document.getElementById('newQuoteText').value = '';
     document.getElementById('newQuoteCategory').value = '';
