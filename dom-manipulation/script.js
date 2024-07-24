@@ -115,6 +115,43 @@ function filterQuotes() {
   quoteDisplay.innerHTML = filteredQuotes.map(quote => `<div>"${quote.text}" - ${quote.category}</div>`).join('');
 }
 
+// Simulated server interaction using JSONPlaceholder
+async function fetchQuotesFromServer() {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const serverQuotes = await response.json();
+    const formattedQuotes = serverQuotes.map(item => ({
+      text: item.title,
+      category: "Server"
+    }));
+    quotes.push(...formattedQuotes);
+    saveQuotes();
+    populateCategories();
+    alert('Quotes synced with server!');
+  } catch (error) {
+    console.error('Error fetching quotes from server:', error);
+  }
+}
+
+async function postQuoteToServer(quote) {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ title: quote.text, body: quote.category })
+    });
+    const result = await response.json();
+    console.log('Quote posted to server:', result);
+  } catch (error) {
+    console.error('Error posting quote to server:', error);
+  }
+}
+
+// Periodic syncing with server
+setInterval(fetchQuotesFromServer, 60000); // Sync every 60 seconds
+
 // Event listener for the "Show New Quote" button
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 
