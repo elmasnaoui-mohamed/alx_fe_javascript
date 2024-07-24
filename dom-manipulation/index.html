@@ -13,7 +13,7 @@
       margin-bottom: 20px;
       font-size: 1.2em;
     }
-    input {
+    input, select {
       margin-right: 10px;
     }
   </style>
@@ -27,6 +27,10 @@
 
   <button id="exportQuotes">Export Quotes</button>
   <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+
+  <select id="categoryFilter" onchange="filterQuotes()">
+    <option value="all">All Categories</option>
+  </select>
 
   <script src="script.js"></script>
 </body>
