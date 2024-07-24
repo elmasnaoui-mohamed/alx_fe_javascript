@@ -51,7 +51,7 @@ function addQuote() {
     saveQuotes();
 
     // Update the categories in the filter dropdown
-    populateCategoryFilter();
+    populateCategories();
 
     // Clear the input fields
     document.getElementById('newQuoteText').value = '';
@@ -82,14 +82,14 @@ function importFromJsonFile(event) {
     const importedQuotes = JSON.parse(event.target.result);
     quotes.push(...importedQuotes);
     saveQuotes();
-    populateCategoryFilter();
+    populateCategories();
     alert('Quotes imported successfully!');
   };
   fileReader.readAsText(event.target.files[0]);
 }
 
 // Function to populate the category filter dropdown
-function populateCategoryFilter() {
+function populateCategories() {
   const categoryFilter = document.getElementById('categoryFilter');
   const uniqueCategories = [...new Set(quotes.map(quote => quote.category))];
   categoryFilter.innerHTML = '<option value="all">All Categories</option>';
@@ -125,5 +125,5 @@ document.getElementById('exportQuotes').addEventListener('click', exportQuotes);
 document.addEventListener('DOMContentLoaded', () => {
   showRandomQuote();
   createAddQuoteForm();
-  populateCategoryFilter();
+  populateCategories();
 });
